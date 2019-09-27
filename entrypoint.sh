@@ -2,10 +2,16 @@
 
 echo "DOCKER BUILD AND PUSH"
 
+if [ -z "${DOCKER_FILE}" ]
+then
+   DOCKER_FILE=Dockerfile
+fi
+
 echo "Environment: "
 echo "- BUILD_PATH: ${BUILD_PATH}";
 echo "- DOCKER_FILE: ${DOCKER_FILE}";
 echo "- CONTAINER_TAG: ${CONTAINER_TAG}";
+
 
 ls -al
 
@@ -16,7 +22,7 @@ fi
 
 ls -al
 
-docker build . -f ${DOCKER_FILE} . -t ${CONTAINER_TAG}
+docker build . -f ${DOCKER_FILE} -t ${CONTAINER_TAG}
 
 docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
 
