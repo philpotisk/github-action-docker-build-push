@@ -7,7 +7,7 @@ echo "Environment: "
 echo "- BUILD_PATH: ${BUILD_PATH}";
 echo "- DOCKER_FILE: ${DOCKER_FILE}";
 echo "- CONTAINER_TAG: ${CONTAINER_TAG}";
-echo "- GITHUB_TOKEN: ${GITHUB_TOKEN}";
+#echo "- GITHUB_TOKEN: ${GITHUB_TOKEN}";
 echo "- GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}";
 echo "- GITHUB_EVENT_PATH: ${GITHUB_EVENT_PATH}";
 echo "- GITHUB_REF: ${GITHUB_REF}";
