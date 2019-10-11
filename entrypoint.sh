@@ -29,7 +29,7 @@ if [[ -z "$GITHUB_EVENT_PATH" ]]; then
   echo "Set the GITHUB_EVENT_PATH env variable."
   exit 1
 fi
-GITHUB_REF
+
 if [[ -z "$GITHUB_REF" ]]; then
   echo "Set the GITHUB_REF env variable."
   exit 1
