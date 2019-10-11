@@ -1,5 +1,5 @@
 #!/bin/sh -l
-set -eu
+set -e
 
 echo "DOCKER BUILD AND PUSH"
 
@@ -7,7 +7,6 @@ echo "Environment: "
 echo "- BUILD_PATH: ${BUILD_PATH}";
 echo "- DOCKER_FILE: ${DOCKER_FILE}";
 echo "- CONTAINER_TAG: ${CONTAINER_TAG}";
-#echo "- GITHUB_TOKEN: ${GITHUB_TOKEN}";
 echo "- GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}";
 echo "- GITHUB_EVENT_PATH: ${GITHUB_EVENT_PATH}";
 echo "- GITHUB_REF: ${GITHUB_REF}";
@@ -19,11 +18,6 @@ if [ -z "${DOCKER_FILE}" ]
 then
    echo "Do Dockerfile spectified. Using default file: Dockerfile"
    DOCKER_FILE=Dockerfile
-fi
-
-if [[ -z "$GITHUB_TOKEN" ]]; then
-  echo "Set the GITHUB_TOKEN env variable."
-  exit 1
 fi
 
 if [[ -z "$GITHUB_EVENT_NAME" ]]; then
