@@ -14,12 +14,6 @@ echo "- GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}";
 echo "- GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}";
 echo "- GITHUB_ACTOR: ${GITHUB_ACTOR}";
 
-if [ -z "${DOCKER_FILE}" ]
-then
-   echo "Do Dockerfile spectified. Using default file: Dockerfile"
-   DOCKER_FILE=Dockerfile
-fi
-
 if [[ -z "$GITHUB_EVENT_NAME" ]]; then
   echo "Set the GITHUB_EVENT_NAME env variable."
   exit 1
@@ -32,6 +26,17 @@ fi
 
 if [[ -z "$GITHUB_REF" ]]; then
   echo "Set the GITHUB_REF env variable."
+  exit 1
+fi
+
+if [ -z "${DOCKER_FILE}" ]
+then
+   echo "No Dockerfile spectified. Using default file: Dockerfile"
+   DOCKER_FILE=Dockerfile
+fi
+
+if [[ -z "$CONTAINER_TAG" ]]; then
+  echo "Set the CONTAINER_TAG env variable."
   exit 1
 fi
 
