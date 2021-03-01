@@ -2,7 +2,7 @@
 FROM docker:stable
 
 LABEL "name"="Docker build/push Action"
-LABEL "maintainer"="Phil <philipp.potisk@danubetech.com>"
+LABEL "maintainer"="Phil <philipp.potisk@gmail.com>"
 LABEL "version"="1.0.0"
 
 LABEL "com.github.actions.name"="Docker build/push Action"

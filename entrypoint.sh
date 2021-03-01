@@ -13,6 +13,7 @@ echo "- GITHUB_REF: ${GITHUB_REF}";
 echo "- GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}";
 echo "- GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}";
 echo "- GITHUB_ACTOR: ${GITHUB_ACTOR}";
+echo "- MAVEN_SETTINGS: ${MAVEN_SETTINGS}";
 
 if [[ -z "$GITHUB_EVENT_NAME" ]]; then
   echo "Set the GITHUB_EVENT_NAME env variable."
@@ -31,7 +32,7 @@ fi
 
 if [ -z "${DOCKER_FILE}" ]
 then
-   echo "No Dockerfile spectified. Using default file: Dockerfile"
+   echo "No Dockerfile specified. Using default file: Dockerfile"
    DOCKER_FILE=Dockerfile
 fi
 
@@ -47,10 +48,23 @@ then
    cd ${BUILD_PATH}
 fi
 
+if [ -n "${MAVEN_SETTINGS}" ]
+then
+   echo "Generating Maven settings.xml file"
+   echo "$MAVEN_SETTINGS" | base64 -d > settings.xml
+fi
+
 ls -al
 
+echo "Building container ..."
 docker build . -f ${DOCKER_FILE} -t ${CONTAINER_TAG}
 
-docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+if [ -n "${DOCKER_USERNAME}" ]
+then
+   echo "Pushing container to DockerHub ..."
 
-docker push ${CONTAINER_TAG}
+   docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+
+   docker push ${CONTAINER_TAG}
+fi
+
